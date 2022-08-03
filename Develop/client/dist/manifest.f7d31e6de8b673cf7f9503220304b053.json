@@ -31,8 +31,8 @@
       "type": "image/png"
     }
   ],
-  "name": "TODOs",
-  "short_name": "TODOs",
+  "name": "jatesw",
+  "short_name": "jatesw",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": "./",
