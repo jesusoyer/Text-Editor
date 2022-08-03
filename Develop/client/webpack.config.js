@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require('path');
 const { InjectManifest } = require("workbox-webpack-plugin");
-
+const WorkboxPlugin = require('workbox-webpack-plugin');
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
 // TODO: Add CSS loaders and babel to webpack.
 
@@ -22,11 +22,29 @@ module.exports = () => {
         template: "./index.html",
         title: "Webpack Plugin",
       }),
+      new WorkboxPlugin.GenerateSW(),
 
-      // new InjectManifest({
-      //   swSrc: "./src/src-sw.js",
-      //   swDest: "service-worker.js",
-      // }),
+      new InjectManifest({
+        swSrc: "./src-sw.js",
+        swDest: "src-sw.js",
+      }),
+      new WebpackPwaManifest({
+        name: 'TODOs',
+        short_name: 'TODOs',
+        description: 'Keep track of important tasks!',
+        background_color: '#7eb4e2',
+        theme_color: '#7eb4e2',
+        start_url: './',
+        publicPath: './',
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          },
+        ],
+      }),
+
     ],
 
     module: {
@@ -43,8 +61,9 @@ module.exports = () => {
           test: /\.m?js$/,
           exclude: /(node_modules|bower_components)/,
           use: {
+            loader: "babel-loader",
             options: {
-              loader: "babel-loader",
+              
               presets: ["@babel/preset-env"],
             },
           },
