@@ -45,7 +45,10 @@ export const getDb = async () => {
   const request = store.get("jesus");
   const result = await request;
   console.log('result.value', result);
-  return result;
+  if(result){
+    return result.content;
+  }
+  return null;
 };
 
 
