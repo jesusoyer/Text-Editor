@@ -22,12 +22,12 @@ module.exports = () => {
         template: "./index.html",
         title: "Webpack Plugin",
       }),
-      new WorkboxPlugin.GenerateSW(),
+      // new WorkboxPlugin.GenerateSW(),
 
-      new InjectManifest({
-        swSrc: "./src-sw.js",
-        swDest: "src-sw.js",
-      }),
+      // new InjectManifest({
+      //   swSrc: "./src-sw.js",
+      //   swDest: "src-sw.js",
+      // }),
       new WebpackPwaManifest({
         name: 'jatesw',
         short_name: 'jatesw',

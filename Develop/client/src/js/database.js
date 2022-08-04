@@ -7,7 +7,7 @@ const initdb = async () =>
         console.log('jate database already exists');
         return;
       }
-      db.createObjectStore('jate', { keyPath: 'id', autoIncrement: true });
+      db.createObjectStore('jate', { keyPath: 'id'});
       console.log('jate database created');
     },
   });
@@ -24,12 +24,14 @@ const initdb = async () =>
 
 
 
-export const putDb = async (id, content) => {
+export const putDb = async (content) => {
   console.log('PUT to the database');
+  
+  console.log(content,"content")
   const jateDb = await openDB('jate', 1);
   const tx = jateDb.transaction('jate', 'readwrite');
   const store = tx.objectStore('jate');
-  const request = store.put({ id: id, jate: content });
+  const request = store.put({ id: "jesus", content });
   const result = await request;
   console.log('🚀 - data saved to the database', result);
 };
@@ -40,7 +42,7 @@ export const getDb = async () => {
   const jateDb = await openDB('jate', 1);
   const tx = jateDb.transaction('jate', 'readonly');
   const store = tx.objectStore('jate');
-  const request = store.getAll();
+  const request = store.get("jesus");
   const result = await request;
   console.log('result.value', result);
   return result;
